@@ -74,6 +74,15 @@ io.on('connection', (socket) => {
         delete users[socket.id];
         io.emit('users_list', getAllUsers());
     });
+
+    //media controll
+    socket.on('media_controller', ({ to, micEnabled, cameraEnabled, }) => {
+        console.log('media_controller');
+        io.to(to).emit('media_controller', {
+            micEnabled,
+            cameraEnabled
+        });
+    })
 });
 
 function getAllUsers() {
